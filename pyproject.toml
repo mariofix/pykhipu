@@ -21,7 +21,10 @@ classifiers = [
 ]
 keywords = ["khipu", "pagos", "transferencias"]
 
-dependencies = ["requests", "python-dateutil"]
+dependencies = [
+    "requests",
+    "python-dateutil",
+]
 
 [project.urls]
 Repository = "http://github.com/mariofix/khipu-tools"

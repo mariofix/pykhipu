@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pykhipu.responses import PaymentsCreateResponse, PaymentsResponse, SuccessResponse
+from .responses import PaymentsCreateResponse, PaymentsResponse, SuccessResponse
 
 
 class Payments:

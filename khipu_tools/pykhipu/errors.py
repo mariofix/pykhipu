@@ -1,4 +1,6 @@
-from pykhipu.items import ErrorItem
+from collections.abc import Iterable
+
+from .items import ErrorItem
 
 
 class BaseError(Exception):
@@ -37,9 +39,9 @@ class ServiceError(BaseError):
 
 
 class ValidationError(BaseError):
-    def __init__(self, status, message, errors=[]):
+    def __init__(self, status, message, errors):
         super().__init__(status, message)
-        self._errors = errors
+        self._errors = errors if errors and errors is Iterable else []
 
     @classmethod
     def from_data(cls, data):

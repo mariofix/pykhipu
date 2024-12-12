@@ -1,7 +1,8 @@
 import dateutil.parser
 import requests
-from pykhipu.errors import AuthorizationError, ServiceError, ValidationError
-from pykhipu.items import BankItem
+
+from .errors import AuthorizationError, ServiceError, ValidationError
+from .items import BankItem
 
 
 class BaseResponse:
@@ -11,7 +12,7 @@ class BaseResponse:
         try:
             response.raise_for_status()
             return cls.from_data(data)
-        except requests.exceptions.HTTPError as e:
+        except requests.exceptions.HTTPError:
             if response.status_code == requests.codes.bad_request:
                 raise ValidationError.from_data(data)
             if response.status_code == requests.codes.forbidden:

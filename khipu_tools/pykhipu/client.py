@@ -1,23 +1,15 @@
 import hmac
 import logging
 import os
-import sys
+from hashlib import sha256
+from importlib.metadata import version
+from urllib.parse import quote
 
 import requests
 
-if sys.version_info.major < 3 or sys.version_info.minor < 9:
-    from importlib_metadata import version
-else:
-    from importlib.metadata import version
-
-from hashlib import sha256
-from urllib.parse import quote, urlencode
-
-from pykhipu.banks import Banks
-
-# from urllib.parse import urlencode, quote
-from pykhipu.payments import Payments
-from pykhipu.receivers import Receivers
+from .banks import Banks
+from .payments import Payments
+from .receivers import Receivers
 
 API_BASE = "https://khipu.com/api/2.0"
 TRUE_LIST = [True, "True", "true", "TRUE", 1, "1"]

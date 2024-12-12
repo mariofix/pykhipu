@@ -1,5 +1,4 @@
-import requests
-from pykhipu.responses import BanksResponse
+from .responses import BanksResponse
 
 
 class Banks:

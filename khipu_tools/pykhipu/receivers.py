@@ -1,3 +1,6 @@
+from .responses import ReceiversCreateResponse
+
+
 class Receivers:
     ENDPOINT = "/receivers"
 
