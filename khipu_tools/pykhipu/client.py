@@ -11,13 +11,13 @@ else:
     from importlib.metadata import version
 
 from hashlib import sha256
+from urllib.parse import quote, urlencode
 
 from pykhipu.banks import Banks
 
 # from urllib.parse import urlencode, quote
 from pykhipu.payments import Payments
 from pykhipu.receivers import Receivers
-from urllib.parse import quote, urlencode
 
 API_BASE = "https://khipu.com/api/2.0"
 TRUE_LIST = [True, "True", "true", "TRUE", 1, "1"]
