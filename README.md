@@ -1,29 +1,33 @@
-# PyKhipu
+# Khipu Tools
 
-Paquete de Python para el API 2.0 del servicio de pagos Khipu
+:warning: :warning: Proyecto en desarrollo activo :warning: :warning:
 
-🇬🇧 Python wrapper for the Khipu payment service API v2.0
+Un cliente de Python simple y eficiente para conectarse con los servicios de Khipu, facilitando transacciones e integraciones financieras.
 
-![PyPI](https://img.shields.io/pypi/v/pykhipu)
+## Características
+- Conexión directa con la API de Khipu (soporte para API v3 en adelante)
+- Soporte para pagos instantáneos (gracias a [fixmycode/pykhipu](https://github.com/fixmycode/pykhipu))
+- Soporte para pagos automáticos
+- Implementación ligera y fácil de usar
+- Manejo de errores y excepciones
 
-## Sobre Khipu
+## Requisitos Previos
+- Python 3.9+
+- Credenciales de Khipu
 
-> [Khipu](https://cl.khipu.com/page/introduccion) permite a las personas y empresas, pagar y cobrar electrónicamente usando sus propias cuentas corrientes o cuentas vista del banco, de manera fácil, rápida y segura. 
-
-## Instalación
-
-```bash
-pip install pykhipu
-```
-
-## Uso
-
-Iguala al API de Khipu en llamadas, ideal para portar código o en casos en que se busque más control sobre los resultados.
-
+## Uso Básico
 ```python
-from pykhipu.client import Client
+from khipu_tools import KhipuClient
 
-client = Client(receiver_id='1234', secret='abcd')
-payment = client.payments.post('test', 'USD', 100)
-print(payment.payment_url)
+# Inicializar cliente
+client = KhipuClient(api_key, secret)
+
+# Crear un cobro
+payment = client.create_payment(
+    amount=1000,
+    subject="Servicio de ejemplo"
+)
 ```
+
+## Licencia
+MIT License
