@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-import six
 from pykhipu.items import ErrorItem
 
 
-@six.python_2_unicode_compatible
 class BaseError(Exception):
     def __init__(self, status, message):
         self._status = status
@@ -11,7 +8,7 @@ class BaseError(Exception):
 
     @classmethod
     def from_data(cls, data):
-        return cls(data.get('status'), data.get('message'))
+        return cls(data.get("status"), data.get("message"))
 
     @property
     def status(self):
@@ -28,8 +25,7 @@ class BaseError(Exception):
         return self._message
 
     def __str__(self):
-        return u'{status} {message}'\
-            .format(status = self._status, message = self._message)
+        return f"{self._status} {self._message}"
 
 
 class AuthorizationError(BaseError):
@@ -47,8 +43,8 @@ class ValidationError(BaseError):
 
     @classmethod
     def from_data(cls, data):
-        errors = [ErrorItem.from_data(i) for i in data.get('errors')]
-        return cls(data.get('status'), data.get('message'), errors)
+        errors = [ErrorItem.from_data(i) for i in data.get("errors")]
+        return cls(data.get("status"), data.get("message"), errors)
 
     @property
     def errors(self):

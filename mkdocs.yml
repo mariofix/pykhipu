@@ -1,0 +1,70 @@
+site_name: khipu-tools
+repo_url: https://github.com/mariofix/khipu-tools
+repo_name: mariofix/khipu-tools
+site_url: https://mariofix.github.io/khipu-tools
+site_description: Set de herramientas para operar con la APIv3 de Khipu
+site_author: mariofix <mariofix@proton.me>
+copyright: "MIT License"
+edit_uri: ""
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: deep purple
+    accent: teal
+  font:
+    text: Roboto
+  language: es
+  icon:
+    logo: material/contactless-payment
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - toc.follow
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - search.share
+
+plugins:
+  - mkdocstrings
+  - search
+
+nav:
+  - Inicio: index.md
+  - Uso: uso.md
+  - Integraciones: providers.md
+  - Referencia: api.md
+  - Colabora: contributing.md
+  - Cambios: CHANGELOG.md
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - tables
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true

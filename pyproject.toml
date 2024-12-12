@@ -1,31 +1,40 @@
-[tool.poetry]
+[project]
 name = "khipu-tools"
 version = "2024.12.1"
-description = "Set de herramientas para operar con la API de Khipu"
-authors = ["Mario Hernandez <mariofix@proton.me>"]
-license = "MIT"
+description = "Set de herramientas para operar con la APIv3 de Khipu"
 readme = "README.md"
-repository = "http://github.com/mariofix/khipu-tools"
-classifiers=[
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Mario Hernandez", email = "mariofix@proton.me" }]
+classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.4",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Environment :: Console",
+    "Operating System :: OS Independent",
 ]
+keywords = ["khipu", "pagos", "transferencias"]
 
-[tool.poetry.dependencies]
-python = ">=3.9"
-requests = "*"
-python-dateutil = "*"
-six = "*"
-importlib_metadata = {version = "^1.7.0", python = "<3.9"}
-mock = "*"
+dependencies = ["requests", "python-dateutil"]
 
-[tool.poetry.dev-dependencies]
-pylint = "*"
+[project.urls]
+Repository = "http://github.com/mariofix/khipu-tools"
+Homepage = "http://mariofix.github.io/khipu-tools"
+
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.masonry.api"
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "pylint",
+    "mock",
+    "pre-commit>=4.0.1",
+]
