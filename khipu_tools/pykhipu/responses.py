@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-import requests
 import dateutil.parser
+import requests
+from pykhipu.errors import AuthorizationError, ServiceError, ValidationError
 from pykhipu.items import BankItem
-from pykhipu.errors import ValidationError, AuthorizationError, ServiceError
 
 
-class BaseResponse(object):
+class BaseResponse:
     @classmethod
     def from_response(cls, response):
         data = response.json()
@@ -23,14 +22,49 @@ class BaseResponse(object):
 
 
 class PaymentsResponse(BaseResponse):
-    def __init__(self, payment_id, payment_url, simplified_transfer_url,
-        transfer_url, webpay_url, hites_url, payme_url, app_url, ready_for_terminal,
-        notification_token, receiver_id, conciliation_date, subject, amount, currency, 
-        status, status_detail, body, picture_url, receipt_url, return_url, cancel_url,
-        notify_url, notify_api_version, expires_date, attachment_urls, bank,
-        bank_id, payer_name, payer_email, personal_identifier,
-        bank_account_number, out_of_date_conciliation, transaction_id, custom,
-        responsible_user_email, send_reminders, send_email, payment_method, funds_source):
+    def __init__(
+        self,
+        payment_id,
+        payment_url,
+        simplified_transfer_url,
+        transfer_url,
+        webpay_url,
+        hites_url,
+        payme_url,
+        app_url,
+        ready_for_terminal,
+        notification_token,
+        receiver_id,
+        conciliation_date,
+        subject,
+        amount,
+        currency,
+        status,
+        status_detail,
+        body,
+        picture_url,
+        receipt_url,
+        return_url,
+        cancel_url,
+        notify_url,
+        notify_api_version,
+        expires_date,
+        attachment_urls,
+        bank,
+        bank_id,
+        payer_name,
+        payer_email,
+        personal_identifier,
+        bank_account_number,
+        out_of_date_conciliation,
+        transaction_id,
+        custom,
+        responsible_user_email,
+        send_reminders,
+        send_email,
+        payment_method,
+        funds_source,
+    ):
         self._payment_id = payment_id
         self._payment_url = payment_url
         self._simplified_transfer_url = simplified_transfer_url
@@ -74,30 +108,53 @@ class PaymentsResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        conciliation_date = data.get('conciliation_date')
+        conciliation_date = data.get("conciliation_date")
         if conciliation_date:
             conciliation_date = dateutil.parser.parse(conciliation_date)
-        expires_date = dateutil.parser.parse(data.get('expires_date'))
+        expires_date = dateutil.parser.parse(data.get("expires_date"))
 
-        return cls(data.get('payment_id'), data.get('payment_url'),
-            data.get('simplified_transfer_url'), data.get('transfer_url'),
-            data.get('webpay_url'), data.get('hites_url'), data.get('payme_url'),
-            data.get('app_url'), data.get('ready_for_terminal'),
-            data.get('notification_token'), data.get('receiver_id'),
-            conciliation_date, data.get('subject'),
-            data.get('amount'), data.get('currency'), data.get('status'),
-            data.get('status_detail'), data.get('body'),
-            data.get('picture_url'), data.get('receipt_url'),
-            data.get('return_url'), data.get('cancel_url'),
-            data.get('notify_url'), data.get('notify_api_version'),
-            expires_date, data.get('attachment_urls'),
-            data.get('bank'), data.get('bank_id'), data.get('payer_name'),
-            data.get('payer_email'), data.get('personal_identifier'),
-            data.get('bank_account_number'),
-            data.get('out_of_date_conciliation'), data.get('transaction_id'),
-            data.get('custom'), data.get('responsible_user_email'),
-            data.get('send_reminders'), data.get('send_email'),
-            data.get('payment_method'), data.get('funds_source'))
+        return cls(
+            data.get("payment_id"),
+            data.get("payment_url"),
+            data.get("simplified_transfer_url"),
+            data.get("transfer_url"),
+            data.get("webpay_url"),
+            data.get("hites_url"),
+            data.get("payme_url"),
+            data.get("app_url"),
+            data.get("ready_for_terminal"),
+            data.get("notification_token"),
+            data.get("receiver_id"),
+            conciliation_date,
+            data.get("subject"),
+            data.get("amount"),
+            data.get("currency"),
+            data.get("status"),
+            data.get("status_detail"),
+            data.get("body"),
+            data.get("picture_url"),
+            data.get("receipt_url"),
+            data.get("return_url"),
+            data.get("cancel_url"),
+            data.get("notify_url"),
+            data.get("notify_api_version"),
+            expires_date,
+            data.get("attachment_urls"),
+            data.get("bank"),
+            data.get("bank_id"),
+            data.get("payer_name"),
+            data.get("payer_email"),
+            data.get("personal_identifier"),
+            data.get("bank_account_number"),
+            data.get("out_of_date_conciliation"),
+            data.get("transaction_id"),
+            data.get("custom"),
+            data.get("responsible_user_email"),
+            data.get("send_reminders"),
+            data.get("send_email"),
+            data.get("payment_method"),
+            data.get("funds_source"),
+        )
 
     @property
     def payment_id(self):
@@ -197,8 +254,7 @@ class PaymentsResponse(BaseResponse):
 
     @property
     def amount(self):
-        """
-        """
+        """ """
         return self._amount
 
     @property
@@ -403,8 +459,18 @@ class PaymentsResponse(BaseResponse):
 
 
 class PaymentsCreateResponse(BaseResponse):
-    def __init__(self, payment_id, payment_url, simplified_transfer_url,
-        transfer_url, webpay_url, hites_url, payme_url, app_url, ready_for_terminal):
+    def __init__(
+        self,
+        payment_id,
+        payment_url,
+        simplified_transfer_url,
+        transfer_url,
+        webpay_url,
+        hites_url,
+        payme_url,
+        app_url,
+        ready_for_terminal,
+    ):
         self._payment_id = payment_id
         self._payment_url = payment_url
         self._simplified_transfer_url = simplified_transfer_url
@@ -417,10 +483,17 @@ class PaymentsCreateResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        return cls(data.get('payment_id'), data.get('payment_url'),
-            data.get('simplified_transfer_url'), data.get('transfer_url'),
-            data.get('webpay_url'), data.get('hites_url'), data.get('payme_url'),
-            data.get('app_url'), data.get('ready_for_terminal'))
+        return cls(
+            data.get("payment_id"),
+            data.get("payment_url"),
+            data.get("simplified_transfer_url"),
+            data.get("transfer_url"),
+            data.get("webpay_url"),
+            data.get("hites_url"),
+            data.get("payme_url"),
+            data.get("app_url"),
+            data.get("ready_for_terminal"),
+        )
 
     @property
     def payment_id(self):
@@ -497,7 +570,7 @@ class ReceiversCreateResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        return cls(data.get('receiver_id'), data.get('secret'))
+        return cls(data.get("receiver_id"), data.get("secret"))
 
     @property
     def receiver_id(self):
@@ -514,13 +587,14 @@ class ReceiversCreateResponse(BaseResponse):
         """
         return self._secret
 
+
 class BanksResponse(BaseResponse):
     def __init__(self, banks):
         self._banks = banks
 
     @classmethod
     def from_data(cls, data):
-        banks = [BankItem.from_data(i) for i in data.get('banks')]
+        banks = [BankItem.from_data(i) for i in data.get("banks")]
         return cls(banks)
 
     @property
@@ -537,7 +611,7 @@ class SuccessResponse(BaseResponse):
 
     @classmethod
     def from_data(cls, data):
-        return cls(data.get('message'))
+        return cls(data.get("message"))
 
     @property
     def message(self):

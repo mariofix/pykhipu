@@ -1,14 +1,10 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
-from pykhipu.responses import (
-    PaymentsResponse,
-    PaymentsCreateResponse,
-    SuccessResponse,
-)
+
+from pykhipu.responses import PaymentsCreateResponse, PaymentsResponse, SuccessResponse
 
 
-class Payments(object):
-    ENDPOINT = '/payments'
+class Payments:
+    ENDPOINT = "/payments"
 
     def __init__(self, client):
         self.client = client
@@ -19,8 +15,9 @@ class Payments(object):
         actual del pago. Se obtiene del notification_token que envia khipu
         cuando el pago es conciliado.
         """
-        response = self.client.make_request('GET', self.ENDPOINT,
-            params={ 'notification_token': notification_token })
+        response = self.client.make_request(
+            "GET", self.ENDPOINT, params={"notification_token": notification_token}
+        )
         return PaymentsResponse.from_response(response)
 
     def post(self, subject, currency, amount, **kwargs):
@@ -28,14 +25,12 @@ class Payments(object):
         Crea un pago en khipu y obtiene las URLs para redirección al usuario
         para que complete el pago.
         """
-        data = {'subject': subject,
-                'currency': currency,
-                'amount': amount }
+        data = {"subject": subject, "currency": currency, "amount": amount}
         data.update(kwargs)
-        if hasattr(data, 'expires_date'):
-            if isinstance(data['expires_date'], datetime):
-                data['expires_date'] = data['expires_date'].isoformat()
-        response = self.client.make_request('POST', self.ENDPOINT, data=data)
+        if hasattr(data, "expires_date"):
+            if isinstance(data["expires_date"], datetime):
+                data["expires_date"] = data["expires_date"].isoformat()
+        response = self.client.make_request("POST", self.ENDPOINT, data=data)
         return PaymentsCreateResponse.from_response(response)
 
     def get_id(self, id):
@@ -43,8 +38,8 @@ class Payments(object):
         Información completa del pago. Datos con los que fue creado y el estado
         actual del pago.
         """
-        endpoint = "{0}/{1}/".format(self.ENDPOINT, id)
-        response = self.client.make_request('GET', endpoint)
+        endpoint = f"{self.ENDPOINT}/{id}/"
+        response = self.client.make_request("GET", endpoint)
         return PaymentsResponse.from_response(response)
 
     def delete(self, id):
@@ -52,8 +47,8 @@ class Payments(object):
         Solo se pueden borrar pagos que estén pendientes de pagar. Esta
         operación no puede deshacerse.
         """
-        endpoint = "{0}/{1}/".format(self.ENDPOINT, id)
-        response = self.client.make_request('DELETE', endpoint)
+        endpoint = f"{self.ENDPOINT}/{id}/"
+        response = self.client.make_request("DELETE", endpoint)
         return SuccessResponse.from_response(response)
 
     def post_refunds(self, id, amount=None):
@@ -64,7 +59,7 @@ class Payments(object):
         """
         data = None
         if amount:
-            data = { 'amount': amount }
-        endpoint = "{0}/{1}/refunds".format(self.ENDPOINT, id)
-        response = self.client.make_request('POST', endpoint, data=data)
+            data = {"amount": amount}
+        endpoint = f"{self.ENDPOINT}/{id}/refunds"
+        response = self.client.make_request("POST", endpoint, data=data)
         return SuccessResponse.from_response(response)

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-class BankItem(object):
+class BankItem:
     def __init__(self, bank_id, name, message, min_amount, bank_type, parent):
         self._bank_id = bank_id
         self._name = name
@@ -14,8 +13,14 @@ class BankItem(object):
         Constructor que permite obtener una instancia de BankItem a partir de un
         diccionario de datos.
         """
-        return cls(data.get('bank_id'), data.get('name'), data.get('message'),
-            data.get('min_amount'), data.get('type'), data.get('parent'))
+        return cls(
+            data.get("bank_id"),
+            data.get("name"),
+            data.get("message"),
+            data.get("min_amount"),
+            data.get("type"),
+            data.get("parent"),
+        )
 
     @property
     def bank_id(self):
@@ -61,14 +66,14 @@ class BankItem(object):
         return self._parent
 
 
-class ErrorItem(object):
+class ErrorItem:
     def __init__(self, field, message):
         self._field = field
         self._message = message
 
     @classmethod
     def from_data(cls, data):
-        return cls(data.get('field'), data.get('message'))
+        return cls(data.get("field"), data.get("message"))
 
     @property
     def field(self):
