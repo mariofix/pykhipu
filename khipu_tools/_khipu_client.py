@@ -1,6 +1,6 @@
 from typing import Any, Optional, Union
 
-from khipu_tools import DEFAULT_API_BASE
+import khipu_tools
 from khipu_tools._api_mode import ApiMode
 from khipu_tools._api_requestor import _APIRequestor
 from khipu_tools._client_options import _ClientOptions
@@ -30,7 +30,7 @@ class KhipuClient:
             raise AuthenticationError("No API key provided.")
 
         base_addresses = {
-            "api": DEFAULT_API_BASE,
+            "api": khipu_tools.DEFAULT_API_BASE,
             **base_addresses,
         }
 
