@@ -7,7 +7,7 @@ app.debug = False
 @app.route("/", defaults={"path": ""}, methods=["GET", "POST"])
 @app.route("/<path:path>", methods=["GET", "POST"])
 def catch_all(path):
-    print(f"{path = }")
+    print(f"{path=}")
     return jsonify({"path": path})
 
 
@@ -36,7 +36,7 @@ def banks():
             },
         ]
     }
-    print(f"{banks =}")
+    print(f"{banks=}")
     return jsonify(banks)
 
 
@@ -50,36 +50,36 @@ def predict():
         "new_destinatary_max_amount": 100000,
     }
 
-    print(f"{prediction = }")
+    print(f"{prediction=}")
     return jsonify(prediction)
 
 
 def log_data(sender, response, **extra):
     print("--------------------")
-    print(f"{request.host = }")
-    print(f"{request.host_url = }")
-    print(f"{request.base_url = }")
-    print(f"{request.full_path = }")
+    print(f"{request.host=}")
+    print(f"{request.host_url=}")
+    print(f"{request.base_url=}")
+    print(f"{request.full_path=}")
     print("--------------------")
-    print(f"{request.content_encoding = }")
-    print(f"{request.content_length = }")
-    print(f"{request.content_type = }")
-    print(f"{request.is_json = }")
-    print(f"{request.origin = }")
-    print(f"{request.method = }")
+    print(f"{request.content_encoding=}")
+    print(f"{request.content_length=}")
+    print(f"{request.content_type=}")
+    print(f"{request.is_json=}")
+    print(f"{request.origin=}")
+    print(f"{request.method=}")
     print("--------------------")
-    print(f"{request.args = }")
-    print(f"{request.cookies = }")
-    print(f"{request.data = }")
-    print(f"{request.form = }")
+    print(f"{request.args=}")
+    print(f"{request.cookies=}")
+    print(f"{request.data=}")
+    print(f"{request.form=}")
     # if request.is_json:
     #     print(f"{request.json() = }")
-    print(f"{request.query_string = }")
-    print(f"{request.headers = }")
+    print(f"{request.query_string=}")
+    print(f"{request.headers=}")
     print("--------------------")
-    print(f"{sender = }")
-    print(f"{response = }")
-    print(f"{extra = }")
+    print(f"{sender=}")
+    print(f"{response=}")
+    print(f"{extra=}")
 
 
 request_finished.connect(log_data, app)
