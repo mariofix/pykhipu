@@ -2,15 +2,16 @@
 
 Khipu Tools es una librería en Python pensada para facilitar la integración con los servicios de Khipu. Este proyecto ofrece funcionalidades clave para manejar transacciones financieras, enfocándose en simplicidad, eficiencia y robustez.
 
-![PyPI - Status](https://img.shields.io/pypi/status/django-payments-flow)
-[![Downloads](https://pepy.tech/badge/django-payments-flow)](https://pepy.tech/project/django-payments-flow)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7dc3c8d6fe844fdaa1de0cb86c242934)](https://app.codacy.com/gh/mariofix/django-payments-flow/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/7dc3c8d6fe844fdaa1de0cb86c242934)](https://app.codacy.com/gh/mariofix/django-payments-flow/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/mariofix/django-payments-flow/main.svg)](https://results.pre-commit.ci/latest/github/mariofix/django-payments-flow/main)
-![PyPI](https://img.shields.io/pypi/v/django-payments-flow)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-payments-flow)
-![PyPI - Implementation](https://img.shields.io/pypi/implementation/django-payments-flow)
-![PyPI - License](https://img.shields.io/pypi/l/django-payments-flow)
+![PyPI - Status](https://img.shields.io/pypi/status/django-payments-chile)
+[![Downloads](https://pepy.tech/badge/django-payments-chile)](https://pepy.tech/project/django-payments-chile)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fde07768d1714b0b93c6addd5e13bb7f)](https://app.codacy.com/gh/mariofix/django-payments-chile/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/fde07768d1714b0b93c6addd5e13bb7f)](https://app.codacy.com/gh/mariofix/django-payments-chile/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/mariofix/django-payments-chile/main.svg)](https://results.pre-commit.ci/latest/github/mariofix/django-payments-chile/main)
+[![Tests & Coverage](https://github.com/mariofix/django-payments-chile/actions/workflows/tests_coverage.yml/badge.svg?branch=main)](https://github.com/mariofix/django-payments-chile/actions/workflows/tests_coverage.yml)
+![PyPI](https://img.shields.io/pypi/v/django-payments-chile)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-payments-chile)
+![PyPI - Implementation](https://img.shields.io/pypi/implementation/django-payments-chile)
+![PyPI - License](https://img.shields.io/pypi/l/django-payments-chile)
 
 ## Características Destacadas
 
@@ -89,21 +90,20 @@ try:
         currency="CLP",
         subject="Pago con Manejo de Errores"
     )
-    print(pago)
 except Exception as e:
     print(f"Error al crear el pago: {e}")
+else:
+    print(pago)
+{
+  "payment_id": "gqzdy6chjne9",
+  "payment_url": "https://khipu.com/payment/info/gqzdy6chjne9",
+  "simplified_transfer_url": "https://app.khipu.com/payment/simplified/gqzdy6chjne9",
+  "transfer_url": "https://khipu.com/payment/manual/gqzdy6chjne9",
+  "app_url": "khipu:///pos/gqzdy6chjne9",
+  "ready_for_terminal": false
+}
 ```
 
-## Navegación de la Documentación
+## Licencia
 
-- **Introducción**: Aprende qué es Khipu Tools y por qué usarlo.
-- **Instalación**: Instrucciones para instalar la librería en tu entorno.
-- **Requisitos Previos**: Asegúrate de contar con todo lo necesario antes de comenzar.
-- **Guía de Uso**: Ejemplos prácticos para comenzar a usar Khipu Tools.
-- **Referencia de API**: Descripción detallada de cada funcionalidad disponible.
-- **Preguntas Frecuentes**: Solución a problemas comunes y consejos útiles.
-- **Contribuir**: Descubre cómo puedes participar en el desarrollo del proyecto.
-
-## Aviso Legal
-
-Este proyecto no está patrocinado ni asociado con Khipu.
+Este proyecto esta licenciado bajo MIT. `khipu-tools` no está patrocinado ni asociado con Khipu.
