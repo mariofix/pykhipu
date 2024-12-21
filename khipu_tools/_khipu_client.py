@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional, Union
 
 from khipu_tools import DEFAULT_API_BASE
 from khipu_tools._api_mode import ApiMode
@@ -25,8 +25,8 @@ class KhipuClient:
         base_addresses: BaseAddresses = {},
         http_client: Optional[HTTPClient] = None,
     ):
-        # The types forbid this, but let's give users without types a friendly error.
-        if api_key is None:  # pyright: ignore[reportUnnecessaryComparison]
+
+        if api_key is None:
             raise AuthenticationError("No API key provided.")
 
         base_addresses = {
@@ -50,16 +50,6 @@ class KhipuClient:
         )
 
         self._options = _ClientOptions()
-
-    def construct_event(
-        self,
-        payload: Union[bytes, str],
-        sig_header: str,
-        secret: str,
-        tolerance: int = 30,
-    ) -> "Event":
-
-        return True
 
     def raw_request(self, method_: str, url_: str, **params):
         params = params.copy()

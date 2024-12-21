@@ -24,10 +24,6 @@ class Predict(APIResource[T]):
     cool_down_date: str
     new_destinatary_max_amount: str
 
-    def auto_paging_iter(cls, **params):
-        print("intentar no usar esto _predict.py:24")
-        return cls.list(**params).auto_paging_iter()
-
     @classmethod
     def get(cls, **params: Unpack["Predict.PredictParams"]) -> KhipuObject["Predict"]:
         """

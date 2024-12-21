@@ -1,12 +1,12 @@
 import json
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, ClassVar, Dict, NoReturn, Optional, Tuple, cast
+from typing import TYPE_CHECKING, Any, ClassVar, Optional, cast
 from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 
 from typing_extensions import Literal, Unpack
 
 # breaking circular dependency
-import khipu_tools  # noqa: IMP101
+import khipu_tools
 import khipu_tools._error as error
 from khipu_tools._api_mode import ApiMode
 from khipu_tools._base_address import BaseAddress
@@ -48,10 +48,6 @@ class _APIRequestor:
         self._options = options
         self._client = client
 
-    # In the case of client=None, we should use the current value of stripe.default_http_client
-    # or lazily initialize it. Since stripe.default_http_client can change throughout the lifetime of
-    # an _APIRequestor, we shouldn't set it as stripe._client and should access it only through this
-    # getter.
     def _get_http_client(self) -> HTTPClient:
         client = self._client
         if client is None:
@@ -62,9 +58,6 @@ class _APIRequestor:
                     "verify_ssl_certs": False,
                     "proxy": None,
                 }
-                # If the stripe.default_http_client has not been set by the user
-                # yet, we'll set it here. This way, we aren't creating a new
-                # HttpClient for every request.
                 khipu_tools.default_http_client = new_default_http_client(
                     async_fallback_client=new_http_client_async_fallback(**kwargs),
                     **kwargs,
@@ -106,12 +99,6 @@ class _APIRequestor:
 
     @classmethod
     def _global_instance(cls):
-        """
-        Returns the singleton instance of _APIRequestor, to be used when
-        calling a static method such as stripe.Customer.create(...)
-        """
-
-        # Lazily initialize.
         if cls._instance is None:
             cls._instance = cls(options=_GlobalRequestorOptions(), client=None)
         return cls._instance
@@ -159,106 +146,6 @@ class _APIRequestor:
         )
 
         return obj
-
-    def handle_error_response(self, rbody, rcode, resp, rheaders, api_mode) -> NoReturn:
-        try:
-            error_data = resp["error"]
-        except (KeyError, TypeError):
-            raise error.APIError(
-                "Invalid response object from API: %r (HTTP response code "
-                "was %d)" % (rbody, rcode),
-                rbody,
-                rcode,
-                resp,
-            )
-
-        err = None
-
-        if err is None:
-            err = (
-                self.specific_v2_api_error(rbody, rcode, resp, rheaders, error_data)
-                if api_mode == "V2"
-                else self.specific_v1_api_error(
-                    rbody, rcode, resp, rheaders, error_data
-                )
-            )
-
-        raise err
-
-    def specific_v2_api_error(self, rbody, rcode, resp, rheaders, error_data):
-        type = error_data.get("type")
-        code = error_data.get("code")
-        message = error_data.get("message")
-        error_args = {
-            "message": message,
-            "http_body": rbody,
-            "http_status": rcode,
-            "json_body": resp,
-            "headers": rheaders,
-            "code": code,
-        }
-
-        log_info(
-            "Stripe v2 API error received",
-            error_code=code,
-            error_type=error_data.get("type"),
-            error_message=message,
-            error_param=error_data.get("param"),
-        )
-
-        return self.specific_v1_api_error(rbody, rcode, resp, rheaders, error_data)
-
-    def specific_v1_api_error(self, rbody, rcode, resp, rheaders, error_data):
-        log_info(
-            "Stripe v1 API error received",
-            error_code=error_data.get("code"),
-            error_type=error_data.get("type"),
-            error_message=error_data.get("message"),
-            error_param=error_data.get("param"),
-        )
-
-        # Rate limits were previously coded as 400's with code 'rate_limit'
-        if rcode == 429 or (rcode == 400 and error_data.get("code") == "rate_limit"):
-            return error.RateLimitError(
-                error_data.get("message"), rbody, rcode, resp, rheaders
-            )
-        elif rcode in [400, 404]:
-            if error_data.get("type") == "idempotency_error":
-                return error.IdempotencyError(
-                    error_data.get("message"), rbody, rcode, resp, rheaders
-                )
-            else:
-                return error.InvalidRequestError(
-                    error_data.get("message"),
-                    error_data.get("param"),
-                    error_data.get("code"),
-                    rbody,
-                    rcode,
-                    resp,
-                    rheaders,
-                )
-        elif rcode == 401:
-            return error.AuthenticationError(
-                error_data.get("message"), rbody, rcode, resp, rheaders
-            )
-        elif rcode == 402:
-            return error.CardError(
-                error_data.get("message"),
-                error_data.get("param"),
-                error_data.get("code"),
-                rbody,
-                rcode,
-                resp,
-                rheaders,
-            )
-        elif rcode == 403:
-            return error.PermissionError(
-                error_data.get("message"), rbody, rcode, resp, rheaders
-            )
-        else:
-            return error.APIError(
-                error_data.get("message"), rbody, rcode, resp, rheaders
-            )
 
     def request_headers(
         self, method: HttpVerb, api_mode: ApiMode, options: RequestOptions
@@ -352,9 +239,7 @@ class _APIRequestor:
             post_data = encoded_body
             print(f"_api_requestor.py:399> {post_data=}")
         else:
-            raise error.APIConnectionError(
-                f"Unrecognized HTTP method {method!r}."
-            )
+            raise error.APIConnectionError(f"Unrecognized HTTP method {method!r}.")
 
         if supplied_headers is not None:
             for key, value in supplied_headers.items():
@@ -416,9 +301,6 @@ class _APIRequestor:
 
         return rcontent, rcode, rheaders
 
-    def _should_handle_code_as_error(self, rcode):
-        return not 200 <= rcode < 300
-
     def _interpret_response(
         self,
         rbody: object,
@@ -426,11 +308,8 @@ class _APIRequestor:
         rheaders: Mapping[str, str],
         api_mode: ApiMode,
     ) -> KhipuResponse:
+
         try:
-            if hasattr(rbody, "decode"):
-                # TODO: should be able to remove this cast once self._client.request_with_retries
-                # returns a more specific type.
-                rbody = cast(bytes, rbody).decode("utf-8")
             resp = KhipuResponse(
                 cast(str, rbody),
                 rcode,
@@ -438,12 +317,11 @@ class _APIRequestor:
             )
         except Exception:
             raise error.APIError(
-                "Invalid response body from API: %s "
-                "(HTTP response code was %d)" % (rbody, rcode),
+                f"Invalid response body from API: {rcode} -- "
+                f"HTTP response  was: {rbody})",
                 cast(bytes, rbody),
                 rcode,
+                cast(bytes, rbody),
                 rheaders,
             )
-        if self._should_handle_code_as_error(rcode):
-            self.handle_error_response(rbody, rcode, resp.data, rheaders, api_mode)
         return resp

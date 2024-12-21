@@ -48,9 +48,6 @@ class ErrorObject(KhipuObject):
         requestor,
         api_mode: ApiMode,
     ) -> None:
-        # Unlike most other API resources, the API will omit attributes in
-        # error objects when they have a null value. We manually set default
-        # values here to facilitate generic error handling.
         values = merge_dicts(
             {
                 "code": None,

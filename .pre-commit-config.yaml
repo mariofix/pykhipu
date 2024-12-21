@@ -9,11 +9,6 @@ repos:
       - id: check-added-large-files
       - id: check-case-conflict
       - id: mixed-line-ending
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-        args: ["--profile", "black", "--filter-files"]
   - repo: https://github.com/psf/black
     rev: 24.10.0
     hooks:
@@ -27,13 +22,3 @@ repos:
     rev: v2.3.1
     hooks:
       - id: autopep8
-  - repo: https://github.com/PyCQA/flake8
-    rev: "7.1.1"
-    hooks:
-      - id: flake8
-        additional_dependencies:
-          - flake8-comprehensions
-          - flake8-bugbear
-          - flake8-polyfill
-          - toml
-        exclude: docs\/.*

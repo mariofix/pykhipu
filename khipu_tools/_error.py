@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Union, cast
+from typing import Optional, Union, cast
 
 import khipu_tools  # noqa
 from khipu_tools._error_object import ErrorObject
@@ -47,7 +47,7 @@ class KhipuError(Exception):
         self.json_body = json_body
         self.headers = headers or {}
         self.code = code
-        self.request_id = self.headers.get("request-id", None)
+        self.request_id = None
         self.error = self._construct_error_object()
 
     def __str__(self):
@@ -88,7 +88,7 @@ class KhipuError(Exception):
             requestor=khipu_tools._APIRequestor._global_instance(),
             # We pass in API mode as "V1" here because it's required,
             # but ErrorObject is reused for both V1 and V2 errors.
-            api_mode="V1",
+            api_mode="V3",
         )
 
 

@@ -1,6 +1,6 @@
 from typing import Optional
 
-import khipu_tools  # noqa: IMP101
+import khipu_tools
 from khipu_tools._base_address import BaseAddresses
 
 

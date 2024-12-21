@@ -1,15 +1,10 @@
-# pyright: strict, reportUnnecessaryTypeIgnoreComment=false
-# reportUnnecessaryTypeIgnoreComment is set to false because some type ignores are required in some
-# python versions but not the others
 from collections.abc import Iterator, Mapping
-from typing import Any, Generic, List, TypeVar, cast
+from typing import Any, Generic, TypeVar, cast
 from urllib.parse import quote_plus
 
 from typing_extensions import Self, Unpack
 
-from khipu_tools._api_requestor import (
-    _APIRequestor,
-)  # pyright: ignore[reportPrivateUsage]
+from khipu_tools._api_requestor import _APIRequestor
 from khipu_tools._khipu_object import KhipuObject
 from khipu_tools._request_options import RequestOptions, extract_options_from_dict
 
@@ -86,9 +81,6 @@ class ListObject(KhipuObject, Generic[T]):
                 ".data[%s])" % (repr(k), repr(k))
             )
 
-    #  Pyright doesn't like this because ListObject inherits from KhipuObject inherits from Dict[str, Any]
-    #  and so it wants the type of __iter__ to agree with __iter__ from Dict[str, Any]
-    #  But we are iterating through "data", which is a List[T].
     def __iter__(  # pyright: ignore
         self,
     ) -> Iterator[T]:

@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Optional
 
 from typing_extensions import NotRequired, TypedDict
 
@@ -16,10 +16,6 @@ def merge_options(
     requestor: RequestorOptions,
     request: Optional[RequestOptions],
 ) -> RequestOptions:
-    """
-    Merge a client and request object, giving precedence to the values from
-    the request object.
-    """
     if request is None:
         return {
             "api_key": requestor.api_key,
@@ -37,10 +33,6 @@ def merge_options(
 def extract_options_from_dict(
     d: Optional[Mapping[str, Any]],
 ) -> tuple[RequestOptions, dict[str, Any]]:
-    """
-    Extracts a RequestOptions object from a dict, and returns a tuple of
-    the RequestOptions object and the remaining dict.
-    """
     if not d:
         return {}, {}
     options: RequestOptions = {}

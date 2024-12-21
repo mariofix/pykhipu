@@ -2,22 +2,13 @@ import random
 import textwrap
 import threading
 from collections.abc import Mapping
-from typing import Any, ClassVar, List, NoReturn, Optional, Tuple, Union, cast, overload
+from typing import Any, ClassVar, NoReturn, Optional, Union, cast, overload
 
 import requests
 from requests import Session as RequestsSession
 from typing_extensions import Literal, Never, TypedDict
 
 from khipu_tools._error import APIConnectionError
-
-# Used for global variables
-
-
-pycurl = None
-httpx = None
-anyio = None
-aiohttp = None
-urlfetch = None
 
 
 def new_default_http_client(*args: Any, **kwargs: Any) -> "HTTPClient":
@@ -227,9 +218,9 @@ class RequestsClient(HTTPClient):
     ) -> tuple[Union[bytes, Any], int, Mapping[str, str]]:
         kwargs = {}
         if self._verify_ssl_certs:
-            kwargs["verify"] = False
+            kwargs["verify"] = True
         else:
-            kwargs["verify"] = False
+            kwargs["verify"] = True
 
         if self._proxy:
             kwargs["proxies"] = self._proxy

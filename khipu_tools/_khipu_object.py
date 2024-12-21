@@ -1,4 +1,3 @@
-# pyright: strict
 import datetime
 import json
 from collections.abc import Mapping
@@ -7,12 +6,7 @@ from typing import (
     TYPE_CHECKING,
     Any,
     ClassVar,
-    Dict,
-    List,
     Optional,
-    Set,
-    Tuple,
-    Type,
     Union,
     cast,
     overload,
@@ -21,11 +15,11 @@ from typing import (
 from typing_extensions import Literal, Self
 
 # Used to break circular imports
-import khipu_tools  # noqa: IMP101
+import khipu_tools
 from khipu_tools import _util
 from khipu_tools._api_mode import ApiMode
 from khipu_tools._base_address import BaseAddress
-from khipu_tools._encode import _encode_datetime  # pyright: ignore
+from khipu_tools._encode import _encode_datetime
 from khipu_tools._khipu_response import KhipuResponse
 from khipu_tools._request_options import extract_options_from_dict
 
@@ -86,7 +80,6 @@ class KhipuObject(dict[str, Any]):
         last_response: Optional[KhipuResponse] = None,
         *,
         _requestor: Optional["_APIRequestor"] = None,
-        # TODO: is a more specific type possible here?
         **params: Any,
     ):
         super().__init__()
@@ -99,7 +92,7 @@ class KhipuObject(dict[str, Any]):
         self._previous = None
 
         self._requestor = (
-            khipu_tools._APIRequestor._global_with_options(  # pyright: ignore[reportPrivateUsage]
+            khipu_tools._APIRequestor._global_with_options(
                 api_key=api_key,
             )
             if _requestor is None
@@ -221,8 +214,6 @@ class KhipuObject(dict[str, Any]):
         cls,
         values: dict[str, Any],
         key: Optional[str],
-        stripe_version: Optional[str] = None,
-        stripe_account: Optional[str] = None,
         last_response: Optional[KhipuResponse] = None,
         *,
         api_mode: ApiMode = "V3",
@@ -404,12 +395,6 @@ class KhipuObject(dict[str, Any]):
             cls=self._ReprJSONEncoder,
         )
 
-    @_util.deprecated(
-        "Deprecated. The public interface will be removed in a future version."
-    )
-    def to_dict(self) -> dict[str, Any]:
-        return dict(self)
-
     def _to_dict_recursive(self) -> dict[str, Any]:
         def maybe_to_dict_recursive(
             value: Optional[Union[KhipuObject, dict[str, Any]]],
@@ -429,15 +414,6 @@ class KhipuObject(dict[str, Any]):
             )
             for key, value in dict(self).items()
         }
-
-    @_util.deprecated("The public interface will be removed in a future version.")
-    def to_dict_recursive(self) -> dict[str, Any]:
-        return self._to_dict_recursive()
-
-    @property
-    @_util.deprecated("The public interface will be removed in a future version.")
-    def stripe_id(self) -> Optional[str]:
-        return getattr(self, "id")
 
     def serialize(self, previous: Optional[Mapping[str, Any]]) -> dict[str, Any]:
         params: dict[str, Any] = {}

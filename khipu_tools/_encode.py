@@ -3,7 +3,7 @@ import datetime
 import time
 from collections import OrderedDict
 from collections.abc import Generator
-from typing import Any, Optional, Tuple
+from typing import Any, Optional
 
 
 def _encode_datetime(dttime: datetime.datetime):

@@ -1,6 +1,5 @@
 import functools
 import hmac
-import io  # noqa: F401
 import logging
 import os
 import re
@@ -10,20 +9,18 @@ from typing import (
     TYPE_CHECKING,
     Any,
     Dict,
-    List,
     Optional,
-    Type,
     TypeVar,
     Union,
     cast,
     overload,
 )
-from urllib.parse import parse_qsl, quote_plus  # noqa: F401
+from urllib.parse import parse_qsl, quote_plus
 
 import typing_extensions
 
 # Used for global variables
-import khipu_tools  # noqa: IMP101
+import khipu_tools
 from khipu_tools._api_mode import ApiMode
 
 if TYPE_CHECKING:
@@ -144,7 +141,7 @@ def convert_to_khipu_object(
     *,
     api_mode: ApiMode = "V3",
 ) -> Union["KhipuObject", list["KhipuObject"]]:
-    from stripe._api_requestor import _APIRequestor
+    from khipu_tools._api_requestor import _APIRequestor
 
     return _convert_to_khipu_object(
         resp=resp,
@@ -190,15 +187,15 @@ def _convert_to_khipu_object(
     # If we get a KhipuResponse, we'll want to return a
     # KhipuObject with the last_response field filled out with
     # the raw API response information
-    stripe_response = None
+    khipu_response = None
 
     # Imports here at runtime to avoid circular dependencies
     from khipu_tools._khipu_object import KhipuObject
     from khipu_tools._khipu_response import KhipuResponse
 
     if isinstance(resp, KhipuResponse):
-        stripe_response = resp
-        resp = cast(Resp, stripe_response.data)
+        khipu_response = resp
+        resp = cast(Resp, khipu_response.data)
 
     if isinstance(resp, list):
         return [
@@ -217,7 +214,7 @@ def _convert_to_khipu_object(
 
         obj = klass._construct_from(
             values=resp,
-            last_response=stripe_response,
+            last_response=khipu_response,
             requestor=requestor,
             api_mode=api_mode,
         )

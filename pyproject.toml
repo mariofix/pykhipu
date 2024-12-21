@@ -40,4 +40,10 @@ build-backend = "setuptools.build_meta"
 include = ["khipu_tools"]
 
 [dependency-groups]
-dev = ["pylint", "mock", "pre-commit>=4.0.1", "flask>=3.1.0"]
+dev = [
+    "pylint",
+    "mock",
+    "pre-commit>=4.0.1",
+    "flask>=3.1.0",
+    "black>=24.10.0",
+]

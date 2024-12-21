@@ -1,3 +1,10 @@
+from khipu_tools._predict import Predict as Predict
+from khipu_tools._banks import Banks as Banks
+from khipu_tools._http_client import (
+    new_default_http_client as new_default_http_client,
+)
+from khipu_tools._khipu_client import KhipuClient as KhipuClient
+from khipu_tools._api_resource import APIResource as APIResource
 from typing import Optional
 
 from typing_extensions import Literal
@@ -8,16 +15,13 @@ from khipu_tools._app_info import AppInfo as AppInfo
 from khipu_tools._version import VERSION as VERSION
 
 # Constants
-DEFAULT_API_BASE: str = "http://tardis.local:5000"
+DEFAULT_API_BASE: str = "https://payment-api.khipu.com"
 
 api_key: Optional[str] = None
 api_base: str = DEFAULT_API_BASE
 api_version: str = _ApiVersion.CURRENT
 default_http_client: Optional["HTTPClient"] = None
 app_info: Optional[AppInfo] = None
-enable_telemetry: bool = False
-max_network_retries: int = 0
-default_http_client = None
 
 
 def ensure_default_http_client():
@@ -47,13 +51,3 @@ def set_app_info(
 
 
 # Infrastructure types
-from khipu_tools._api_resource import APIResource as APIResource
-from khipu_tools._khipu_client import KhipuClient as KhipuClient
-
-from khipu_tools._http_client import (
-    new_default_http_client as new_default_http_client,
-)
-
-from khipu_tools._banks import Banks as Banks
-
-from khipu_tools._predict import Predict as Predict
