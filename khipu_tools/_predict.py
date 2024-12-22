@@ -1,6 +1,6 @@
 from typing import ClassVar, TypeVar
 
-from typing_extensions import Literal, Unpack
+from typing import Literal, Unpack
 
 from khipu_tools._api_resource import APIResource
 from khipu_tools._khipu_object import KhipuObject

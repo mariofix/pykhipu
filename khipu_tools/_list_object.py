@@ -2,7 +2,7 @@ from collections.abc import Iterator, Mapping
 from typing import Any, Generic, TypeVar, cast
 from urllib.parse import quote_plus
 
-from typing_extensions import Self, Unpack
+from typing import Self, Unpack
 
 from khipu_tools._api_requestor import _APIRequestor
 from khipu_tools._khipu_object import KhipuObject

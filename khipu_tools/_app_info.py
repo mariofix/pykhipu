@@ -1,6 +1,6 @@
 from typing import Optional
 
-from typing_extensions import TypedDict
+from typing import TypedDict
 
 
 class AppInfo(TypedDict):

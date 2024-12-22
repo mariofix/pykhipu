@@ -12,7 +12,7 @@ from typing import (
     overload,
 )
 
-from typing_extensions import Literal, Self
+from typing import Literal, Self
 
 # Used to break circular imports
 import khipu_tools

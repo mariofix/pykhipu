@@ -1,7 +1,7 @@
 from collections.abc import Mapping
 from typing import Any, Optional
 
-from typing_extensions import NotRequired, TypedDict
+from typing import NotRequired, TypedDict
 
 from khipu_tools._requestor_options import RequestorOptions
 

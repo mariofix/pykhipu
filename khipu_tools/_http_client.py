@@ -6,7 +6,7 @@ from typing import Any, ClassVar, NoReturn, Optional, Union, cast, overload
 
 import requests
 from requests import Session as RequestsSession
-from typing_extensions import Literal, Never, TypedDict
+from typing import Literal, Never, TypedDict
 
 from khipu_tools._error import APIConnectionError
 

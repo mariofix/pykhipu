@@ -1,6 +1,6 @@
 from typing import Optional
 
-from typing_extensions import Literal
+from typing import Literal
 
 from khipu_tools._api_requestor import _APIRequestor
 from khipu_tools._api_version import _ApiVersion

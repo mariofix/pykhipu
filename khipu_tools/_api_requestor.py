@@ -3,7 +3,7 @@ from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, ClassVar, Optional, cast
 from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 
-from typing_extensions import Literal, Unpack
+from typing import Literal, Unpack
 
 # breaking circular dependency
 import khipu_tools
