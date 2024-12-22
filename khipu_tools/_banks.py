@@ -9,13 +9,24 @@ T = TypeVar("T", bound=KhipuObject)
 
 
 class BankItem:
+    """
+    Informacion de banco
+    """
+
     bank_id: str
+    """Identificador del banco."""
     name: str
+    """Nombre del banco."""
     message: str
+    """Mensaje con particularidades del banco."""
     min_amount: int
+    """Monto mínimo que acepta el banco en un pago"""
     type: Literal["Persona", "Empresa"]
+    """Tipo de banco."""
     parent: str
+    """Identificador del banco padre (si un banco tiene banca personas y empresas, el primero será el padre del segundo)."""
     logo_url: str
+    """URL del logo del banco."""
 
 
 class Banks(APIResource[T]):
@@ -23,6 +34,7 @@ class Banks(APIResource[T]):
     OBJECT_PREFIX: ClassVar[Literal["v3"]] = "v3"
 
     banks: list[BankItem]
+    """Listado con Bancos registrados"""
 
     @classmethod
     def get(cls) -> KhipuObject["Banks"]:

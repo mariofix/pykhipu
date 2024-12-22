@@ -1,6 +1,6 @@
-# Guía de Colaboración para django-payments-chile
+# Guía de Colaboración para khipu-tools
 
-¡Gracias por tu interés en colaborar con django-payments-chile! Este documento te guiará a través del proceso de contribución al proyecto.
+¡Gracias por tu interés en colaborar con khipu-tools! Este documento te guiará a través del proceso de contribución al proyecto.
 
 ## Formas de Colaborar
 
@@ -27,15 +27,15 @@ Puedes clonar el repositorio de dos maneras:
 ### Usando Git
 
 ```shell
-git clone https://github.com/mariofix/django-payments-chile.git
-cd django-payments-chile
+git clone https://github.com/mariofix/khipu-tools.git
+cd khipu-tools
 ```
 
 ### Usando GitHub CLI
 
 ```shell
-gh repo clone mariofix/django-payments-chile
-cd django-payments-chile
+gh repo clone mariofix/khipu-tools
+cd khipu-tools
 ```
 
 ## Configuración del Entorno de Desarrollo
@@ -96,4 +96,4 @@ Al contribuir a este proyecto, aceptas que tus contribuciones se licenciarán ba
 
 Si tienes preguntas o necesitas ayuda, no dudes en crear un issue en GitHub.
 
-¡Gracias por tu contribución a django-payments-chile!
+¡Gracias por tu contribución a khipu-tools!

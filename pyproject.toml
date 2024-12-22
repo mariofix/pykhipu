@@ -21,11 +21,7 @@ classifiers = [
 ]
 keywords = ["khipu", "pagos", "transferencias"]
 
-dependencies = [
-    "python-dateutil",
-    "python-slugify>=8.0.4",
-    "requests>=2.32.3",
-]
+dependencies = ["python-dateutil", "python-slugify>=8.0.4", "requests>=2.32.3"]
 
 [project.urls]
 Repository = "http://github.com/mariofix/khipu-tools"
@@ -33,13 +29,11 @@ Homepage = "http://mariofix.github.io/khipu-tools"
 
 
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-include = ["khipu_tools"]
+[project.optional-dependencies]
 
-[dependency-groups]
 dev = [
     "pylint",
     "mock",

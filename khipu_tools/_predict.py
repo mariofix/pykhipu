@@ -15,14 +15,28 @@ class Predict(APIResource[T]):
 
     class PredictParams(RequestOptions):
         payer_email: str
+        """Correo electrónico del pagador"""
         bank_id: str
+        """Identificador del banco de origen"""
         amount: str
+        """Monto del pago"""
         currency: str
+        """Moneda en formato ISO-4217"""
 
-    result: str
+    result: Literal[
+        "ok",
+        "new_destinatary_amount_exceeded",
+        "max_amount_exceeded",
+        "new_destinatary_cool_down",
+        "not_available_account",
+    ]
+    """El resultado de la predicción."""
     max_amount: int
+    """El monto máximo posible para transferir."""
     cool_down_date: str
+    """Fecha de término para la restricción de monto en formato ISO-8601"""
     new_destinatary_max_amount: str
+    """Monto máximo para transferir a un nuevo destinatario."""
 
     @classmethod
     def get(cls, **params: Unpack["Predict.PredictParams"]) -> KhipuObject["Predict"]:
@@ -37,7 +51,7 @@ class Predict(APIResource[T]):
         )
         if not isinstance(result, KhipuObject):
             raise TypeError(
-                "Expected SripeObject object from API, got %s" % (type(result).__name__)
+                "Expected KhipuObject object from API, got %s" % (type(result).__name__)
             )
 
         return result

@@ -35,11 +35,11 @@ plugins:
 
 nav:
   - Inicio: index.md
-  # - Uso: uso.md
-  # - Integraciones: providers.md
-  # - Referencia: api.md
-  # - Colabora: contributing.md
-  # - Cambios: CHANGELOG.md
+  - Pagos Instantáneos: pagos-instantaneos.md
+  - Pagos Automáticos: pagos-automaticos.md
+  - API: api.md
+  - Colabora: contributing.md
+  - Cambios: CHANGELOG.md
 
 markdown_extensions:
   - abbr

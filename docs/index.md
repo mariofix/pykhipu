@@ -2,16 +2,16 @@
 
 Khipu Tools es una librería en Python pensada para facilitar la integración con los servicios de Khipu. Este proyecto ofrece funcionalidades clave para manejar transacciones financieras, enfocándose en simplicidad, eficiencia y robustez.
 
-![PyPI - Status](https://img.shields.io/pypi/status/django-payments-chile)
-[![Downloads](https://pepy.tech/badge/django-payments-chile)](https://pepy.tech/project/django-payments-chile)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fde07768d1714b0b93c6addd5e13bb7f)](https://app.codacy.com/gh/mariofix/django-payments-chile/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/fde07768d1714b0b93c6addd5e13bb7f)](https://app.codacy.com/gh/mariofix/django-payments-chile/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/mariofix/django-payments-chile/main.svg)](https://results.pre-commit.ci/latest/github/mariofix/django-payments-chile/main)
-[![Tests & Coverage](https://github.com/mariofix/django-payments-chile/actions/workflows/tests_coverage.yml/badge.svg?branch=main)](https://github.com/mariofix/django-payments-chile/actions/workflows/tests_coverage.yml)
-![PyPI](https://img.shields.io/pypi/v/django-payments-chile)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-payments-chile)
-![PyPI - Implementation](https://img.shields.io/pypi/implementation/django-payments-chile)
-![PyPI - License](https://img.shields.io/pypi/l/django-payments-chile)
+![PyPI - Status](https://img.shields.io/pypi/status/khipu-tools)
+[![Downloads](https://pepy.tech/badge/khipu-tools)](https://pepy.tech/project/khipu-tools)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fde07768d1714b0b93c6addd5e13bb7f)](https://app.codacy.com/gh/mariofix/khipu-tools/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/fde07768d1714b0b93c6addd5e13bb7f)](https://app.codacy.com/gh/mariofix/khipu-tools/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/mariofix/khipu-tools/main.svg)](https://results.pre-commit.ci/latest/github/mariofix/khipu-tools/main)
+[![Tests & Coverage](https://github.com/mariofix/khipu-tools/actions/workflows/tests_coverage.yml/badge.svg?branch=main)](https://github.com/mariofix/khipu-tools/actions/workflows/tests_coverage.yml)
+![PyPI](https://img.shields.io/pypi/v/khipu-tools)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/khipu-tools)
+![PyPI - Implementation](https://img.shields.io/pypi/implementation/khipu-tools)
+![PyPI - License](https://img.shields.io/pypi/l/khipu-tools)
 
 ## Características Destacadas
 
