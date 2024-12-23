@@ -34,10 +34,7 @@ class KhipuError(Exception):
                 try:
                     body = cast(bytes, http_body).decode("utf-8")
                 except BaseException:
-                    body = (
-                        "<Could not decode body as utf-8. "
-                        "Please report to mariofix@proton.me>"
-                    )
+                    body = "<Could not decode body as utf-8. " "Please report to mariofix@proton.me>"
             elif isinstance(http_body, str):
                 body = http_body
 

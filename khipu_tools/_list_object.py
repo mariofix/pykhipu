@@ -20,9 +20,7 @@ class ListObject(KhipuObject, Generic[T]):
     def _get_url_for_list(self) -> str:
         url = self.get("url")
         if not isinstance(url, str):
-            raise ValueError(
-                'Cannot call .list on a list object without a string "url" property'
-            )
+            raise ValueError('Cannot call .list on a list object without a string "url" property')
         return url
 
     def list(self, **params: Mapping[str, Any]) -> Self:
@@ -96,10 +94,7 @@ class ListObject(KhipuObject, Generic[T]):
         page = self
 
         while True:
-            if (
-                "ending_before" in self._retrieve_params
-                and "starting_after" not in self._retrieve_params
-            ):
+            if "ending_before" in self._retrieve_params and "starting_after" not in self._retrieve_params:
                 yield from reversed(page)
                 page = page.previous_page()
             else:
@@ -147,9 +142,7 @@ class ListObject(KhipuObject, Generic[T]):
             **self._get_filters_for_next_page(params),
         )
 
-    def _get_filters_for_previous_page(
-        self, params: RequestOptions
-    ) -> Mapping[str, Any]:
+    def _get_filters_for_previous_page(self, params: RequestOptions) -> Mapping[str, Any]:
         first_id = getattr(self.data[0], "id")
         if not first_id:
             raise ValueError("Unexpected: element in .data of list object had no id")

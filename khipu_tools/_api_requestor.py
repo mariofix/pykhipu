@@ -85,9 +85,7 @@ class _APIRequestor:
         ]:
             if key in options and options[key] is not None:
                 new_options[key] = options[key]
-        return _APIRequestor(
-            options=RequestorOptions(**new_options), client=self._client
-        )
+        return _APIRequestor(options=RequestorOptions(**new_options), client=self._client)
 
     @property
     def api_key(self):
@@ -147,9 +145,7 @@ class _APIRequestor:
 
         return obj
 
-    def request_headers(
-        self, method: HttpVerb, api_mode: ApiMode, options: RequestOptions
-    ):
+    def request_headers(self, method: HttpVerb, api_mode: ApiMode, options: RequestOptions):
         user_agent = f"khipu_tools/{khipu_tools.VERSION}"
         if khipu_tools.app_info:
             user_agent += " " + self._format_app_info(khipu_tools.app_info)
@@ -317,8 +313,7 @@ class _APIRequestor:
             )
         except Exception:
             raise error.APIError(
-                f"Invalid response body from API: {rcode} -- "
-                f"HTTP response  was: {rbody})",
+                f"Invalid response body from API: {rcode} -- " f"HTTP response  was: {rbody})",
                 cast(bytes, rbody),
                 rcode,
                 cast(bytes, rbody),

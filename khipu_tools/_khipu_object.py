@@ -28,9 +28,7 @@ if TYPE_CHECKING:
 
 
 @overload
-def _compute_diff(
-    current: dict[str, Any], previous: Optional[dict[str, Any]]
-) -> dict[str, Any]: ...
+def _compute_diff(current: dict[str, Any], previous: Optional[dict[str, Any]]) -> dict[str, Any]: ...
 
 
 @overload
@@ -176,8 +174,7 @@ class KhipuObject(dict[str, Any]):
                     "It was then wiped when refreshing the object with "
                     "the result returned by Stripe's API, probably as a "
                     "result of a save().  The attributes currently "
-                    "available on this object are: %s"
-                    % (k, k, ", ".join(list(self.keys())))
+                    "available on this object are: %s" % (k, k, ", ".join(list(self.keys())))
                 )
             else:
                 raise err

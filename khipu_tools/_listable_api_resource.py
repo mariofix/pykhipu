@@ -24,8 +24,6 @@ class ListableAPIResource(APIResource[T]):
         )
 
         if not isinstance(result, ListObject):
-            raise TypeError(
-                f"Expected list object from API, got {type(result).__name__}"
-            )
+            raise TypeError(f"Expected list object from API, got {type(result).__name__}")
 
         return result

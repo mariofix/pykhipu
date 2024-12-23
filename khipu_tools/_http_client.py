@@ -54,9 +54,7 @@ class HTTPClient:
     ):
         return False
 
-    def _retry_after_header(
-        self, response: Optional[tuple[Any, Any, Mapping[str, str]]] = None
-    ):
+    def _retry_after_header(self, response: Optional[tuple[Any, Any, Mapping[str, str]]] = None):
         return None
 
     def _sleep_time_seconds(
@@ -173,9 +171,7 @@ class RequestsClient(HTTPClient):
         headers: Optional[Mapping[str, str]],
         post_data=None,
     ) -> tuple[bytes, int, Mapping[str, str]]:
-        return self._request_internal(
-            method, url, headers, post_data, is_streaming=False
-        )
+        return self._request_internal(method, url, headers, post_data, is_streaming=False)
 
     def request_stream(
         self,
@@ -184,9 +180,7 @@ class RequestsClient(HTTPClient):
         headers: Optional[Mapping[str, str]],
         post_data=None,
     ) -> tuple[Any, int, Mapping[str, str]]:
-        return self._request_internal(
-            method, url, headers, post_data, is_streaming=True
-        )
+        return self._request_internal(method, url, headers, post_data, is_streaming=True)
 
     @overload
     def _request_internal(
@@ -332,9 +326,7 @@ class NoImportFoundAsyncClient(HTTPClient):
     ) -> tuple[bytes, int, Mapping[str, str]]:
         self.raise_async_client_import_error()
 
-    async def request_stream_async(
-        self, method: str, url: str, headers: Mapping[str, str], post_data=None
-    ):
+    async def request_stream_async(self, method: str, url: str, headers: Mapping[str, str], post_data=None):
         self.raise_async_client_import_error()
 
     async def close_async(self):

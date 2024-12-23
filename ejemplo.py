@@ -95,10 +95,7 @@ if __name__ == "__main__":
         # Format the output as the required JSON structure
         output = []
         for file_name, functions in function_calls.items():
-            modules = [
-                {"function": func_name, "count": count}
-                for func_name, count in functions.items()
-            ]
+            modules = [{"function": func_name, "count": count} for func_name, count in functions.items()]
             output.append({"file": file_name, "modules": modules})
 
         # Print the JSON string
