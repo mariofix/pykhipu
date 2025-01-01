@@ -1,3 +1,11 @@
+from khipu_tools._predict import Predict as Predict
+from khipu_tools._payments import Payments as Payments
+from khipu_tools._banks import Banks as Banks
+from khipu_tools._http_client import (
+    new_default_http_client as new_default_http_client,
+)
+from khipu_tools._api_resource import APIResource as APIResource
+from khipu_tools._khipu_client import KhipuClient as KhipuClient
 from typing import Optional
 
 from typing import Literal
@@ -44,17 +52,3 @@ def set_app_info(
 
 
 # Infrastructure types
-from khipu_tools._khipu_client import KhipuClient as KhipuClient
-from khipu_tools._api_resource import APIResource as APIResource
-
-
-from khipu_tools._http_client import (
-    new_default_http_client as new_default_http_client,
-)
-
-
-from khipu_tools._banks import Banks as Banks
-
-from khipu_tools._payments import Payments as Payments
-
-from khipu_tools._predict import Predict as Predict

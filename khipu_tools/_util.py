@@ -225,10 +225,7 @@ def _convert_to_khipu_object(
         if (
             params is not None
             and hasattr(obj, "object")
-            and (
-                (getattr(obj, "object") == "list")
-                or (getattr(obj, "object") == "search_result")
-            )
+            and ((getattr(obj, "object") == "list") or (getattr(obj, "object") == "search_result"))
         ):
             obj._retrieve_params = params
 

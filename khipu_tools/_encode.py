@@ -28,9 +28,7 @@ def _json_encode_date_callback(value):
     return value
 
 
-def _api_encode(
-    data, api_mode: Optional[str]
-) -> Generator[tuple[str, Any], None, None]:
+def _api_encode(data, api_mode: Optional[str]) -> Generator[tuple[str, Any], None, None]:
     for key, value in data.items():
         if value is None:
             continue
