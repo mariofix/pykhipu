@@ -1,7 +1,8 @@
 from decimal import Decimal
 from typing import ClassVar, Optional, TypeVar
 
-from typing import Literal, Unpack
+from typing import Literal
+from typing_extensions import Unpack
 
 from khipu_tools._api_resource import APIResource
 from khipu_tools._khipu_object import KhipuObject
@@ -87,6 +88,10 @@ class Payments(APIResource[T]):
     class PaymentInfo(RequestOptions):
         payment_id: str
         """Identificador del pago"""
+
+    class PaymentRefundResponse(KhipuObject):
+        message: str
+        """Mensaje a desplegar al usuario."""
 
     payment_id: str
     """Identificador único del pago, es una cadena alfanumérica de 12 caracteres. Como este identificador es único, se puede usar, por ejemplo, para evitar procesar una notificación repetida. (Khipu espera un código 200 al notificar un pago, si esto no ocurre se reintenta hasta por dos días)."""
@@ -212,5 +217,21 @@ class Payments(APIResource[T]):
             "delete",
             f"{cls.class_url()}/{params['payment_id']}",
         )
+
+        return result
+
+    @classmethod
+    def refund(cls, **params: Unpack["Payments.PaymentInfo"]) -> KhipuObject["Payments.PaymentRefundResponse"]:
+        """
+        Reembolsa total o parcialmente el monto de un pago. Esta operación solo se puede realizar en los comercios que
+        recauden en cuenta Khipu y antes de la rendición de los fondos correspondientes.
+        """
+        result = cls._static_request(
+            "post",
+            f"{cls.class_url()}/{params['payment_id']}/refunds",
+            params=params,
+        )
+        if not isinstance(result, KhipuObject):
+            raise TypeError("Expected KhipuObject object from API, got %s" % (type(result).__name__))
 
         return result

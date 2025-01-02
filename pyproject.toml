@@ -1,6 +1,6 @@
 [project]
 name = "khipu-tools"
-version = "2024.12.4"
+version = "2025.1.0"
 description = "Set de herramientas para operar con la APIv3 de Khipu"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -18,13 +18,26 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Operating System :: OS Independent",
 ]
-keywords = ["khipu", "pagos", "transferencias"]
+keywords = [
+    "khipu",
+    "pagos",
+    "transferencias",
+    "payment",
+    "subscription",
+    "subscripcion",
+]
 
-dependencies = ["python-dateutil", "python-slugify>=8.0.4", "requests>=2.32.3"]
+dependencies = [
+    "python-dateutil",
+    "python-slugify>=8.0.4",
+    "requests>=2.32.3",
+    "typing-extensions>=4.12.2",
+]
 
 [project.urls]
 Repository = "http://github.com/mariofix/khipu-tools"
 Homepage = "http://mariofix.github.io/khipu-tools"
+Documentation = "http://mariofix.github.io/khipu-tools"
 
 
 [build-system]
@@ -58,6 +71,12 @@ line_length = 119
 multi_line_output = 5
 py_version = 39
 
+[tool.autopep8]
+max_line_length = 119
+ignore = "E501,W6"    # or ["E501", "W6"]
+in-place = true
+recursive = true
+aggressive = 3
 
 [tool.coverage.report]
 exclude_lines = ["if TYPE_CHECKING:", "# noqa", "# nosec"]

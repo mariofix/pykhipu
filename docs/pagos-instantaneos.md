@@ -122,6 +122,26 @@ Respuesta
 }
 ```
 
+## Reembolsar Pago
+
+Reembolsa total o parcialmente el monto de un pago. Esta operación solo se puede
+realizar en los comercios que recauden en cuenta Khipu y antes de la rendición de los fondos correspondientes.
+
+```py
+import khipu_tools
+
+khipu_tools.api_key = "khipu-apiv3-key
+khipu_tools.Payments.refund(payment_id="gqzdy6chjne9")
+```
+
+Respuesta
+
+```json
+{
+  "message": "Message"
+}
+```
+
 ## Eliminar Pago
 
 Borrar un pago. Solo se pueden borrar pagos que estén pendientes de pagar. Esta operación no puede deshacerse.

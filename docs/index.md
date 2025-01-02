@@ -19,10 +19,6 @@ Khipu Tools es una librería en Python pensada para facilitar la integración co
 
 Los pagos instantáneos son una de las funcionalidades principales de Khipu Tools. Esta funcionalidad permite generar y gestionar pagos al instante con un diseño que optimiza la simplicidad y velocidad.
 
-#### Basado en pykhipu
-
-Esta funcionalidad aprovecha las bases establecidas por [fixmycode/pykhipu](https://github.com/fixmycode/pykhipu), garantizando integración con la API de Khipu de manera confiable y eficiente.
-
 **Ejemplo de código:**
 
 ```python
@@ -30,10 +26,10 @@ import khipu_tools
 
 khipu_tools.api_key = "tu-api-key"
 
-pago = khipu_tools.InstantPayments.create(
+pago = khipu_tools.Payments.create(
     amount=5000,
     currency="CLP",
-    subject="Pago Instantáneo de Prueba"
+    subject="Pago de Prueba"
 )
 
 print(pago)
@@ -85,7 +81,7 @@ import khipu_tools
 khipu_tools.api_key = "tu-api-key"
 
 try:
-    pago = khipu_tools.InstantPayments.create(
+    pago = khipu_tools.Payments.create(
         amount=5000,
         currency="CLP",
         subject="Pago con Manejo de Errores"

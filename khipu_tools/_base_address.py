@@ -1,6 +1,5 @@
-from typing import Optional
-
-from typing import Literal, NotRequired, TypedDict
+from typing import Literal, TypedDict, Optional
+from typing_extensions import NotRequired
 
 BaseAddress = Literal["api"]
 

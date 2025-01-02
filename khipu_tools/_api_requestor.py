@@ -3,7 +3,8 @@ from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, ClassVar, Optional, cast
 from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
 
-from typing import Literal, Unpack
+from typing import Literal
+from typing_extensions import Unpack
 
 # breaking circular dependency
 import khipu_tools
@@ -63,7 +64,7 @@ class _APIRequestor:
                     **kwargs,
                 )
                 _default_proxy = None
-            elif None != _default_proxy:
+            elif None is not _default_proxy:
                 import warnings
 
                 warnings.warn(
@@ -186,15 +187,18 @@ class _APIRequestor:
         if params and (method == "get" or method == "delete"):
             # if we're sending params in the querystring, then we have to make sure we're not
             # duplicating anything we got back from the server already (like in a list iterator)
-            # so, we parse the querystring the server sends back so we can merge with what we (or the user) are trying to send
+            # so, we parse the querystring the server sends back so we can merge with
+            # what we (or the user) are trying to send
             existing_params = {}
             for k, v in parse_qs(urlsplit(url).query).items():
-                # note: server sends back "expand[]" but users supply "expand", so we strip the brackets from the key name
+                # note: server sends back "expand[]" but users supply "expand", so we
+                # strip the brackets from the key name
                 if k.endswith("[]"):
                     existing_params[k[:-2]] = v
                 else:
                     # all querystrings are pulled out as lists.
-                    # We want to keep the querystrings that actually are lists, but flatten the ones that are single values
+                    # We want to keep the querystrings that actually are lists, but flatten
+                    # the ones that are single values
                     existing_params[k] = v[0] if len(v) == 1 else v
 
             params = {

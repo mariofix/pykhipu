@@ -17,7 +17,7 @@ from typing import (
 )
 from urllib.parse import parse_qsl, quote_plus
 
-import typing
+import typing_extensions
 
 # Used for global variables
 import khipu_tools
@@ -33,7 +33,7 @@ KHIPU_LOG = os.environ.get("KHIPU_LOG")
 logger: logging.Logger = logging.getLogger("khipu")
 
 
-deprecated = typing.deprecated
+deprecated = typing_extensions.deprecated
 
 
 def _console_log_level():

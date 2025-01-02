@@ -40,7 +40,7 @@ import khipu_tools
 khipu_tools.api_key = "tu-api-key"
 
 # Crear un pago
-pago = khipu_tools.InstantPayments.create(
+pago = khipu_tools.Payments.create(
     amount=5000,
     currency="CLP",
     subject="Pago de Prueba"
